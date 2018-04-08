@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.yun</groupId>
+	<artifactId>yun-eureka-server</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>yun-eureka-server</name>
+	<description>Spring Cloud In Action</description>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.5.10.RELEASE</version>
+		<relativePath/>
+	</parent>
+
+	<properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <spring-cloud.version>Edgware.SR3</spring-cloud.version>
+    </properties>
+    <profiles>
+		<profile>
+            <id>dev</id>
+            <properties>
+                <profiles.active>dev</profiles.active> 
+            </properties>
+            <!--  默认启用的是dev环境配置 -->
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>test</id>
+            <properties>
+                <profiles.active>test</profiles.active>
+            </properties>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <profiles.active>prod</profiles.active>
+            </properties>
+        </profile>     
+    </profiles>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-eureka-server</artifactId>
+        </dependency>
+
+        <!-- <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency> -->
+    </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+	
+	<build>
+		<finalName>yun-eureka-server</finalName>
+		<resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <!-- resource的filtering属性用来表示资源文件中的占位符是否需要被替换，true为需要替换 -->
+                <filtering>true</filtering>
+                <!-- 引入资源文件信息 -->
+                <includes>
+                    <include>application.properties</include>               
+                    <include>application-${profiles.active}.properties</include>
+                </includes>
+            </resource>
+        </resources>
+			
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin </artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>		
+                    <jvmArguments>-Dfile.encoding=UTF-8</jvmArguments> 
+                    <encoding>UTF-8</encoding>
+                    <useDefaultDelimiters>true</useDefaultDelimiters>
+                </configuration> 
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>							
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>

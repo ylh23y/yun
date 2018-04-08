@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<configuration>
+	<springProperty name="logFile" source="log.file" />
+	<springProperty name="rootlevel" source="log.level.root" />
+	<springProperty name="mylevel" source="log.level.my" />
+	<springProperty name="maxFileSize" source="log.maxsize" />
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d [%thread] %-5level %logger{50} -[%file:%line]- %msg%n
+			</pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+	</appender>
+	
+	<!-- 按照每天生成日志文件 -->
+    <appender name="FILE"  class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--日志文件输出的文件名-->
+            <FileNamePattern>${logFile}.%d{yyyy-MM-dd}.log</FileNamePattern>
+            <!--日志文件保留天数-->
+            <MaxHistory>30</MaxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+        </encoder>
+        <!--日志文件最大的大小-->
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>100MB</MaxFileSize>
+        </triggeringPolicy>
+    </appender>
+
+		<!-- <appender name="adminLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${logFile}_%d{yyyy-MM-dd}.log</FileNamePattern>
+            <MaxHistory>30</MaxHistory>
+        </rollingPolicy>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>%d [%thread] %-5level -[%file:%line]- %msg%n
+			</pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<fileNamePattern>${logFile}.%d{yyyy-MM-dd}.%i</fileNamePattern>
+			<maxFileSize>${maxFileSize}</maxFileSize>
+		</rollingPolicy>
+	</appender> -->
+
+	<appender name="errorLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!-- <file>${logFile}.error</file> -->
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--日志文件输出的文件名-->
+            <FileNamePattern>${logFile}.error.%d{yyyy-MM-dd}.log</FileNamePattern>
+            <!--日志文件保留天数-->
+            <MaxHistory>30</MaxHistory>
+        </rollingPolicy>
+		<encoder>
+			<pattern>%d [%thread] %-5level %logger{36} -[%file:%line]- %msg%n
+			</pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<fileNamePattern>${logFile}.error.%d{yyyy-MM-dd}.%i</fileNamePattern>
+			<maxFileSize>${maxFileSize}</maxFileSize>
+		</rollingPolicy>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>error</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+	</appender>
+
+	<appender name="sqlLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!-- <file>${logFile}.sql</file> -->
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--日志文件输出的文件名-->
+            <FileNamePattern>${logFile}.sql.%d{yyyy-MM-dd}.log</FileNamePattern>
+            <!--日志文件保留天数-->
+            <MaxHistory>30</MaxHistory>
+        </rollingPolicy>
+		<encoder>
+			<pattern>%d [%thread] %msg%n
+			</pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<fileNamePattern>${logFile}.sql.%d{yyyy-MM-dd}.%i</fileNamePattern>
+			<maxFileSize>${maxFileSize}</maxFileSize>
+		</rollingPolicy>
+	</appender>
+
+	<!-- <logger name="adminLogger" level="${mylevel}" additivity="true">
+		<appender-ref ref="adminLog" />
+	</logger> -->
+
+	<logger name="com.hemiao.security" level="${mylevel}" additivity="true">
+		<appender-ref ref="sqlLog" />
+	</logger>
+ 	<!--myibatis log configure-->
+    <logger name="com.apache.ibatis" level="TRACE"/>
+    <logger name="java.sql.Connection" level="DEBUG"/>
+    <logger name="java.sql.Statement" level="DEBUG"/>
+    <logger name="java.sql.PreparedStatement" level="DEBUG"/>
+    
+	<root level="${rootlevel}">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="errorLog" />
+		<appender-ref ref="FILE" /> 		
+	</root>
+
+</configuration>
