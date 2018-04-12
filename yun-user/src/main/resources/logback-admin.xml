@@ -89,11 +89,6 @@
 			<maxFileSize>${maxFileSize}</maxFileSize>
 		</rollingPolicy>
 	</appender>
-
-	<!-- <logger name="adminLogger" level="${mylevel}" additivity="true">
-		<appender-ref ref="adminLog" />
-	</logger> -->
-
 	<logger name="com.yun.security" level="${mylevel}" additivity="true">
 		<appender-ref ref="sqlLog" />
 	</logger>
