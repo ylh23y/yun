@@ -54,7 +54,7 @@ CREATE TABLE `sys_role` (
 
 /*Data for the table `sys_role` */
 
-insert  into `sys_role`(`id`,`name`,`description`,`createTime`,`updateTime`) values ('399189939004510208','门店','门店','2018-01-10 10:46:23','2018-01-22 10:57:28'),('399190049092407296','超级管理员','管理审核','2018-01-06 13:18:44','2018-03-03 13:16:51'),('399964761359781888','管理员','管理员','2018-01-08 16:37:10','2018-02-24 14:55:42'),('400601259989929984','制作公司','制作公司','2018-01-10 10:46:23','2018-01-20 11:57:44'),('406508755774476288','门店操作员','门店操作员','2018-01-26 18:00:39','2018-01-26 18:02:56'),('418438827427106816','设计部','设计师使用','2018-02-28 16:06:30','2018-03-06 14:06:35'),('420584182256111616','运营部','运营管理','2018-03-06 14:11:23',NULL),('420587003495976960','采购部','采购管理','2018-03-06 14:22:35',NULL),('420587464630341632','行政部','行政文员','2018-03-06 14:24:25',NULL),('420587791769276416','销售部','销售管理','2018-03-06 14:25:43',NULL);
+insert  into `sys_role`(`id`,`name`,`description`,`createTime`,`updateTime`) values ('399189939004510208','门店','门店','2018-01-10 10:46:23','2018-01-22 10:57:28'),('399190049092407296','超级管理员','管理审核','2018-01-06 13:18:44','2018-03-03 13:16:51'),('399964761359781888','管理员','管理员','2018-01-08 16:37:10','2018-02-24 14:55:42'),('400601259989929984','制作公司','制作公司','2018-01-10 10:46:23','2018-01-20 11:57:44'),('406508755774476288','门店操作员','门店操作员','2018-01-26 18:00:39','2018-01-26 18:02:56'),('418438827427106816','设计部','设计师使用','2018-02-28 16:06:30','2018-03-06 14:06:35'),('420584182256111616','运营部','运营管理','2018-03-06 14:11:23',NULL);
 
 /*Table structure for table `sys_role_permission` */
 
@@ -109,7 +109,7 @@ CREATE TABLE `sys_user` (
 
 /*Data for the table `sys_user` */
 
-insert  into `sys_user`(`id`,`username`,`password`,`nickname`,`headImgUrl`,`phone`,`telephone`,`email`,`last_password_reset_date`,`birthday`,`sex`,`status`,`createTime`,`updateTime`) values ('1','admin','$2a$10$UC3MNANdbA4v2A9lCQtuWeac8gm5pcZPqsciPdrSP8eVmgmfvcNie','管理员',NULL,'','18911111111','rhf@163.com','2018-01-24 14:12:29','1998-07-01',0,0,'2017-04-10 15:21:38','2018-01-17 15:58:52'),('405397164576346112','fh','$2a$10$MGouRzvNxvn1mfpDkoACROGgrcFN06KRGrkafxjmFpSqE6ZZLF3fK','fh',NULL,NULL,'18671620000','1111@163.com','2018-01-23 16:23:35',NULL,NULL,0,'2018-01-23 16:23:35',NULL);
+insert  into `sys_user`(`id`,`username`,`password`,`nickname`,`headImgUrl`,`phone`,`telephone`,`email`,`last_password_reset_date`,`birthday`,`sex`,`status`,`createTime`,`updateTime`) values ('1','admin','$2a$10$UC3MNANdbA4v2A9lCQtuWeac8gm5pcZPqsciPdrSP8eVmgmfvcNie','管理员',NULL,'','18911111111','rhf@163.com','2018-01-24 14:12:29','1998-07-01',0,0,'2017-04-10 15:21:38','2018-01-17 15:58:52'),('2','fhadmin','$2a$10$MGouRzvNxvn1mfpDkoACROGgrcFN06KRGrkafxjmFpSqE6ZZLF3fK','fh',NULL,NULL,'18671620000','1111@163.com','2018-01-23 16:23:35',NULL,NULL,0,'2018-01-23 16:23:35',NULL);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
