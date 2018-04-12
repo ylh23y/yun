@@ -94,7 +94,7 @@
 		<appender-ref ref="adminLog" />
 	</logger> -->
 
-	<logger name="com.hemiao.security" level="${mylevel}" additivity="true">
+	<logger name="com.yun.security" level="${mylevel}" additivity="true">
 		<appender-ref ref="sqlLog" />
 	</logger>
  	<!--myibatis log configure-->
